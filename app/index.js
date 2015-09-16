@@ -7,7 +7,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 //var chalk = require('chalk');
 
-var OnepagchalkeGenerator = yeoman.generators.Base.extend({
+var Generator = yeoman.generators.Base.extend({
     promptUser: function() {
         var done = this.async();
 
@@ -64,4 +64,4 @@ var OnepagchalkeGenerator = yeoman.generators.Base.extend({
     }
 });
 
-module.exports = OnepageGenerator;
+module.exports = Generator;
