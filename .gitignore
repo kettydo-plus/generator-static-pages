@@ -1,0 +1,7 @@
+node_modules
+src/css/*.*
+src/less/*.*
+src/js/*.*
+src/json/**/*.*
+src/partials/*.*
+src/excel/*.*
