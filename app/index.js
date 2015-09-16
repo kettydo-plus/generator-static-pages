@@ -42,11 +42,24 @@ var Generator = yeoman.generators.Base.extend({
     },
     copyMainFiles: function(){
 
-        this.copy("_gruntfile.js", "Gruntfile.js");
-        this.copy("_package.json", "package.json");
-        this.directory("grunt-tasks/config")
-        this.directory("grunt-tasks/tasks")
-        this.directory("grunt-tasks/utils")
+        this.bulkCopy("_gruntfile.js", "Gruntfile.js");
+        this.bulkCopy("_package.json", "package.json");
+        this.bulkCopy("grunt-tasks/config/_connect.js","grunt-tasks/config/connect.js");
+        this.bulkCopy("grunt-tasks/config/_express.js","grunt-tasks/config/express.js");
+        this.bulkCopy("grunt-tasks/config/_excel4node.js","grunt-tasks/config/excel4node.js");
+        this.bulkCopy("grunt-tasks/config/_less.js","grunt-tasks/config/less.js");
+        this.bulkCopy("grunt-tasks/config/_open.js","grunt-tasks/config/open.js");
+        this.bulkCopy("grunt-tasks/config/_pages-builder.js","grunt-tasks/config/pages-builder.js");
+        this.bulkCopy("grunt-tasks/config/_processhtml.js","grunt-tasks/config/processhtml.js");
+        this.bulkCopy("grunt-tasks/config/_sitemap-generator.js","grunt-tasks/config/sitemap-generator.js");
+        this.bulkCopy("grunt-tasks/config/_watch.js","grunt-tasks/config/watch.js");
+        this.bulkCopy("grunt-tasks/tasks/_excel4node.js","grunt-tasks/tasks/excel4node.js");
+        this.bulkCopy("grunt-tasks/tasks/_pages-builder.js","grunt-tasks/tasks/pages-builder.js");
+        this.bulkCopy("grunt-tasks/tasks/_sitemap-generator.js","grunt-tasks/tasks/sitemap-generator.js");
+        this.bulkCopy("grunt-tasks/utils/_utils.js","grunt-tasks/utils/Utils.js");
+        this.bulkCopy("grunt-tasks/utils/_xlsx-rows.js","grunt-tasks/utils/xlsx-rows.js");
+
+        //this.directory("grunt-tasks/","grunt-tasks");
         //this.copy("_main.css", "app/css/main.css");
 
         var context = {
@@ -63,5 +76,6 @@ var Generator = yeoman.generators.Base.extend({
         });
     }
 });
+
 
 module.exports = Generator;

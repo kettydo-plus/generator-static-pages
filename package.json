@@ -9,5 +9,8 @@
 
   ],
   "author": "Kettydo+",
-  "main": "app/index.js"
+  "main": "app/index.js",
+  "dependencies": {
+    "yeoman-generator": "^0.20.2"
+  }
 }

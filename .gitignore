@@ -1,9 +1,9 @@
 node_modules
-src/css/*.*
-src/less/*.*
-src/js/*.*
-src/json/**/*.*
-src/partials/*.*
-src/excel/*.*
+/src/css/*.*
+/src/less/*.*
+/src/js/*.*
+/src/json/**/*.*
+/src/partials/*.*
+/src/excel/*.*
 .idea
 sample
