@@ -5,7 +5,7 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
+//var chalk = require('chalk');
 
 var OnepageGenerator = yeoman.generators.Base.extend({
     promptUser: function() {
@@ -17,12 +17,7 @@ var OnepageGenerator = yeoman.generators.Base.extend({
         var prompts = [{
             name: 'appName',
             message: 'What is your app\'s name ?'
-        },{
-            type: 'confirm',
-            name: 'addDemoSection',
-            message: 'Would you like to generate a demo section ?',
-            default: true
-        }];
+        } ];
 
         this.prompt(prompts, function (props) {
             this.appName = props.appName;
@@ -49,13 +44,16 @@ var OnepageGenerator = yeoman.generators.Base.extend({
 
         this.copy("_gruntfile.js", "Gruntfile.js");
         this.copy("_package.json", "package.json");
-        this.copy("_main.css", "app/css/main.css");
+        this.directory("grunt-tasks/config")
+        this.directory("grunt-tasks/tasks")
+        this.directory("grunt-tasks/utils")
+        //this.copy("_main.css", "app/css/main.css");
 
         var context = {
             site_name: this.appName
         };
 
-        this.template("_header.html", "app/header.html", context);
+        //this.template("_header.html", "app/header.html", context);
     },
     runNpm: function(){
         var done = this.async();
