@@ -8,7 +8,7 @@ module.exports = {
 
         files: {
             "src/sitemap.html": "src",
-            "htdocs/sitemap.html": "src"
+            "htdocs/sitemap.html": "htdocs"
         }
     }
 };
