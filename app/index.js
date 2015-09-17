@@ -8,74 +8,95 @@ var yeoman = require('yeoman-generator');
 //var chalk = require('chalk');
 
 var Generator = yeoman.generators.Base.extend({
-    promptUser: function() {
+    prompting: function () {
         var done = this.async();
 
         // have Yeoman greet the user
         console.log(this.yeoman);
 
         var prompts = [{
-            name: 'appName',
-            message: 'What is your app\'s name ?'
-        } ];
+            name: 'appname',
+            message: 'What is your app\'s name ?',
+            type: "input"
+        }, {
+            name: 'addSampleFiles',
+            message: 'Would you like add sample files ?',
+            type: "confirm"
+        }];
 
         this.prompt(prompts, function (props) {
-            this.appName = props.appName;
-            this.addDemoSection = props.addDemoSection;
+            this.appname = props.appname;
+            this.addSampleFiles = props.addSampleFiles;
 
             done();
         }.bind(this));
     },
-    scaffoldFolders: function(){
-        this.mkdir("grunt-tasks");
-        this.mkdir("grunt-tasks/config");
-        this.mkdir("grunt-tasks/tasks");
-        this.mkdir("grunt-tasks/utils");
-        this.mkdir("htdocs");
-        this.mkdir("src");
-        this.mkdir("src/css");
-        this.mkdir("src/excel");
-        this.mkdir("src/js");
-        this.mkdir("src/json/pages");
-        this.mkdir("src/less");
-        this.mkdir("src/partials");
+    /* scaffoldFolders: function () {
+
+     },*/
+    writing: {
+        folders: function () {
+            this.mkdir("grunt-tasks");
+            this.mkdir("grunt-tasks/config");
+            this.mkdir("grunt-tasks/tasks");
+            this.mkdir("grunt-tasks/utils");
+            this.mkdir("htdocs");
+            this.mkdir("src");
+            this.mkdir("src/css");
+            this.mkdir("src/excel");
+            this.mkdir("src/js");
+            this.mkdir("src/json/pages");
+            this.mkdir("src/less");
+            this.mkdir("src/partials");
+        },
+        files: function () {
+            this.fs.copyTpl(
+                this.templatePath('_package.json'),
+                this.destinationPath('package.json'),
+                {site_name: this.appName}
+            );
+
+            this.fs.copy(this.templatePath("_gruntfile.js"), this.destinationPath("Gruntfile.js"));
+            //this.fs.copy(this.templatePath("_package.json"),this.destinationPath( "package.json"));
+
+            this.fs.copy(this.templatePath("grunt-tasks/config/_connect.js"), this.destinationPath("grunt-tasks/config/connect.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_express.js"), this.destinationPath("grunt-tasks/config/express.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_excel4node.js"), this.destinationPath("grunt-tasks/config/excel4node.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_less.js"), this.destinationPath("grunt-tasks/config/less.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_open.js"), this.destinationPath("grunt-tasks/config/open.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_pages-builder-no-sample.js"), this.destinationPath("grunt-tasks/config/pages-builder.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_processhtml.js"), this.destinationPath("grunt-tasks/config/processhtml.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_sitemap-generator.js"), this.destinationPath("grunt-tasks/config/sitemap-generator.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/config/_watch.js"), this.destinationPath("grunt-tasks/config/watch.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/tasks/_excel4node.js"), this.destinationPath("grunt-tasks/tasks/excel4node.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/tasks/_pages-builder.js"), this.destinationPath("grunt-tasks/tasks/pages-builder.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/tasks/_sitemap-generator.js"), this.destinationPath("grunt-tasks/tasks/sitemap-generator.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/utils/_utils.js"), this.destinationPath("grunt-tasks/utils/Utils.js"));
+            this.fs.copy(this.templatePath("grunt-tasks/utils/_xlsx-rows.js"), this.destinationPath("grunt-tasks/utils/xlsx-rows.js"));
+
+        },
+        sampleFiles: function () {
+            if (this.addSampleFiles) {
+                this.fs.copy(this.templatePath("grunt-tasks/config/_pages-builder.js"), this.destinationPath("grunt-tasks/config/pages-builder.js"));
+
+                this.fs.copy(this.templatePath("src/_index-tpl.html"), this.destinationPath("src/index-tpl.html"));
+                this.fs.copy(this.templatePath("src/less/_index.less"), this.destinationPath("src/less/index.less"));
+                this.fs.copy(this.templatePath("src/partials/_header.html"), this.destinationPath("src/partials/header.html"));
+                this.fs.copy(this.templatePath("src/json/pages/_common-labels.json"), this.destinationPath("src/json/pages/common-labels.json"));
+                this.fs.copy(this.templatePath("src/excel/_common-labels.xlsx"), this.destinationPath("src/excel/common-labels.xlsx"));
+                this.fs.copy(this.templatePath("src/json/pages/_index.json"), this.destinationPath("src/json/pages/index.json"));
+                this.fs.copy(this.templatePath("src/excel/_index.xlsx"), this.destinationPath("src/excel/index.xlsx"));
+
+            }
+        }
     },
-    copyMainFiles: function(){
-
-        this.bulkCopy("_gruntfile.js", "Gruntfile.js");
-        this.bulkCopy("_package.json", "package.json");
-        this.bulkCopy("grunt-tasks/config/_connect.js","grunt-tasks/config/connect.js");
-        this.bulkCopy("grunt-tasks/config/_express.js","grunt-tasks/config/express.js");
-        this.bulkCopy("grunt-tasks/config/_excel4node.js","grunt-tasks/config/excel4node.js");
-        this.bulkCopy("grunt-tasks/config/_less.js","grunt-tasks/config/less.js");
-        this.bulkCopy("grunt-tasks/config/_open.js","grunt-tasks/config/open.js");
-        this.bulkCopy("grunt-tasks/config/_pages-builder.js","grunt-tasks/config/pages-builder.js");
-        this.bulkCopy("grunt-tasks/config/_processhtml.js","grunt-tasks/config/processhtml.js");
-        this.bulkCopy("grunt-tasks/config/_sitemap-generator.js","grunt-tasks/config/sitemap-generator.js");
-        this.bulkCopy("grunt-tasks/config/_watch.js","grunt-tasks/config/watch.js");
-        this.bulkCopy("grunt-tasks/tasks/_excel4node.js","grunt-tasks/tasks/excel4node.js");
-        this.bulkCopy("grunt-tasks/tasks/_pages-builder.js","grunt-tasks/tasks/pages-builder.js");
-        this.bulkCopy("grunt-tasks/tasks/_sitemap-generator.js","grunt-tasks/tasks/sitemap-generator.js");
-        this.bulkCopy("grunt-tasks/utils/_utils.js","grunt-tasks/utils/Utils.js");
-        this.bulkCopy("grunt-tasks/utils/_xlsx-rows.js","grunt-tasks/utils/xlsx-rows.js");
-
-        //this.directory("grunt-tasks/","grunt-tasks");
-        //this.copy("_main.css", "app/css/main.css");
-
-        var context = {
-            site_name: this.appName
-        };
-
-        //this.template("_header.html", "app/header.html", context);
-    },
-    runNpm: function(){
-        var done = this.async();
-        this.npmInstall("", function(){
-            console.log("\nEverything Setup !!!\n");
-            done();
+    install: function () {
+        this.npmInstall([''], {'saveDev': true}, function () {
+            console.log('Everything is ready!');
         });
-    }
-});
 
+    }
+
+});
 
 module.exports = Generator;

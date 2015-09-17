@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--generato da less-->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+includi parziali
+<!-- build:include ./partials/header.html --> <!-- /build -->
+
+includi variabili common
+<!-- build:template
+   <%= key %>
+     /build -->
+
+includi variabili specifiche
+<!-- build:template
+   <%= key_index %>
+     /build -->
+
+
+</body>
+</html>
