@@ -59,6 +59,7 @@ var Generator = yeoman.generators.Base.extend({
             this.fs.copy(this.templatePath("_gruntfile.js"), this.destinationPath("Gruntfile.js"));
             //this.fs.copy(this.templatePath("_package.json"),this.destinationPath( "package.json"));
 
+            this.fs.copy(this.templatePath("grunt-tasks/config/_copy.js"), this.destinationPath("grunt-tasks/config/copy.js"));
             this.fs.copy(this.templatePath("grunt-tasks/config/_connect.js"), this.destinationPath("grunt-tasks/config/connect.js"));
             this.fs.copy(this.templatePath("grunt-tasks/config/_express.js"), this.destinationPath("grunt-tasks/config/express.js"));
             this.fs.copy(this.templatePath("grunt-tasks/config/_excel4node.js"), this.destinationPath("grunt-tasks/config/excel4node.js"));

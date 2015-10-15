@@ -11,7 +11,7 @@ module.exports = {
 
             locales: ["it_IT"],
             templateUrl: utils.getSRC() + "index-tpl.html", // template da compilare
-            pagePattern: utils.getHTDOCS() + "{{page}}.html", // pattern per pagina di destinazione
+            pagePattern: utils.getSRC() + "{{page}}.html", // pattern per pagina di destinazione
             pages: [{
                 name: "index",//[required]
                 messages: utils.getSourcePath(utils.JSON) + "pages/index.json"// lista json dei messaggi per pagina [opzionale]

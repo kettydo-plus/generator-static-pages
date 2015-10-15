@@ -5,7 +5,7 @@ var utils = require("../utils/Utils");
 module.exports = {
     all: {
         options: {
-            bases: [utils.getHTDOCS()],
+            bases: [utils.getSRC()],
             port: 8080,
             hostname: "localhost",
             livereload: true
